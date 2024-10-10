@@ -1,6 +1,7 @@
 from typing import List, Optional
 
 from cartesia._sse import _SSE
+from cartesia._bytes import _BYTES
 from cartesia._types import (
     DeprecatedOutputFormatMapping,
     OutputFormat,
@@ -23,6 +24,9 @@ class TTS(Resource):
         )
         self._sse_class = _SSE(self._http_url(), self.headers, self.timeout)
         self.sse = self._sse_class.send
+
+        self._bytes_class = _BYTES(self._http_url(), self.headers, self.timeout)
+        self.bytes = self._bytes_class.send
 
     def websocket(self) -> _WebSocket:
         """This method returns a WebSocket object that can be used to generate audio using WebSocket.
