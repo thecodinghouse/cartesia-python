@@ -68,13 +68,9 @@ class _BYTES:
             request_body["duration"] = duration
 
         generator = self._bytes_generator_wrapper(request_body)
-
-        if stream:
-            return generator
-
         chunks = []
         for chunk in generator:
-            chunks.append(chunk["audio"])
+            chunks.append(chunk)
 
         return {"audio": b"".join(chunks)}
 
