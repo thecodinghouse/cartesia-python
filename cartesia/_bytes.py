@@ -39,7 +39,7 @@ class _BYTES:
         voice: Dict[str, str],
         duration: Optional[int] = None,
         language: Optional[str] = None,
-    ) -> Union[bytes, Generator[bytes, None, None]]:
+    ) -> bytes:
         """Send a request to the server to generate audio using Bytes.
 
         Args:
@@ -72,7 +72,7 @@ class _BYTES:
         for chunk in generator:
             chunks.append(chunk)
 
-        return {"audio": b"".join(chunks)}
+        return b"".join(chunks)
 
     @retry_on_connection_error(
         max_retries=MAX_RETRIES, backoff_factor=BACKOFF_FACTOR, logger=logger
